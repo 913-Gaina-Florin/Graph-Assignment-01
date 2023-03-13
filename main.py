@@ -7,3 +7,4 @@ def print_options():
 
 if __name__ == '__main__':
     graph = DirectedGraph()
+    graph.print_graphh()

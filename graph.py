@@ -1,11 +1,40 @@
-
-
 class DirectedGraph:
     def __init__(self):
         self.__dictionary_predecessor = {}
         self.__dictionary_successor = {}
         self.__dictionary_cost = {}
-        self.read_standard_format("graph1.txt")
+        self.read_standard_format("graph1m.txt")
+
+    def print_graphh(self):
+        # test function
+        for key in self.__dictionary_cost.keys():
+            print(key, self.__dictionary_cost[key])
+
+    def is_vertex(self, vertex):
+        if vertex in self.__dictionary_predecessor.keys():
+            return True
+        if vertex in self.__dictionary_successor.keys():
+            return True
+        return False
+
+    def is_edge(self, u, v):
+        if (u, v) in self.__dictionary_cost.keys():
+            return True
+        return False
+
+    def add_vertex(self, vertex):
+        if not self.is_vertex(vertex):
+            self.__dictionary_predecessor[vertex] = []
+            self.__dictionary_successor[vertex] = []
+
+    def add_edge(self, u, v, cost):
+        if not self.is_vertex(u) or not self.is_vertex(v):
+            return
+
+        if not self.is_edge(u, v):
+            self.__dictionary_predecessor[v].append(u)
+            self.__dictionary_successor[u].append(v)
+            self.__dictionary_cost[(u, v)] = cost
 
     def read_standard_format(self, file_name):
         file = open(file_name, "r")
@@ -17,10 +46,8 @@ class DirectedGraph:
 
         lines = file.readlines()
         for line in lines:
-            #TODO check for already existing vertexes using is_Vertex
+            # TODO check for already existing vertexes using is_Vertex
             x, y, cost = line.split(" ")
-            self.__dictionary_cost[(x, y)] = cost
-            self.__dictionary_successor[x] = y
-            self.__dictionary_predecessor[y] = x
-
-
+            self.add_vertex(x)
+            self.add_vertex(y)
+            self.add_edge(x, y, cost)
