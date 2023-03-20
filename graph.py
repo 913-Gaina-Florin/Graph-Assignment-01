@@ -2,11 +2,11 @@ import copy
 
 
 class DirectedGraph:
-    def __init__(self):
+    def __init__(self, file_name):
         self.__dictionary_predecessor = {}
         self.__dictionary_successor = {}
         self.__dictionary_cost = {}
-        self.read_standard_format("graph1.txt")
+        self.read_standard_format(file_name)
 
     def print_graphh(self):
         # test function
@@ -19,6 +19,11 @@ class DirectedGraph:
         if vertex in self.__dictionary_successor.keys():
             return True
         return False
+
+    def get_cost(self, u, v):
+        if not self.is_edge(u, v):
+            return None
+        return self.__dictionary_cost[(u, v)]
 
     def get_in_degree(self, vertex):
         if not self.is_vertex(vertex):
@@ -64,12 +69,12 @@ class DirectedGraph:
         try:
             n, m = first_line.split(" ")
         except Exception:
+            print("Error reading the file. ")
             return
 
         lines = file.readlines()
         for line in lines:
-            # TODO check for already existing vertexes using is_Vertex
             x, y, cost = line.split(" ")
-            self.add_vertex(int(x))
-            self.add_vertex(int(y))
-            self.add_edge(int(x), int(y), int(cost))
+            self.add_vertex(x)
+            self.add_vertex(y)
+            self.add_edge(x, y, cost)
