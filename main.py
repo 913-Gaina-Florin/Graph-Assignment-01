@@ -164,5 +164,5 @@ def main_loop(input_graph: DirectedGraph):
 
 
 if __name__ == '__main__':
-    graph = DirectedGraph("graph1k.txt")
+    graph = DirectedGraph()
     main_loop(graph)

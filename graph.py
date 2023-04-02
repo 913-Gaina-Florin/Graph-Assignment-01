@@ -3,7 +3,7 @@ from random import randint
 
 
 class DirectedGraph:
-    def __init__(self, file_name):
+    def __init__(self):
         self.__dictionary_predecessor = {}
         self.__dictionary_successor = {}
         self.__dictionary_cost = {}
@@ -196,6 +196,9 @@ class DirectedGraph:
 
     def generate_random_graph(self, nr_vertices, nr_edges):
         self.__clear_memory()
+
+        if nr_edges > nr_vertices * nr_vertices:
+            nr_edges = nr_vertices * nr_vertices
 
         counter = 0
         while counter < nr_edges:
