@@ -19,6 +19,9 @@ def print_options():
     print("14 - Read graph standard format. ")
     print("15 - Read graph special format. ")
     print("16 - Save graph special format. ")
+    print("17 - Delete vertex. ")
+    print("18 - Delete edge. ")
+    print("19 - Create random graph. ")
 
 
 def main_loop(input_graph: DirectedGraph):
@@ -133,10 +136,31 @@ def main_loop(input_graph: DirectedGraph):
             input_graph.read_standard_format(file_name)
 
         elif user_option == "15":
-            pass
+            file_name = input("Enter the file name: ")
+            input_graph.read_special_format(file_name)
 
         elif user_option == "16":
-            pass
+            file_name = input("Enter the file name: ")
+            input_graph.write_special_format(file_name)
+
+        elif user_option == "17":
+            vertex = input("Enter the vertex: ")
+            if not input_graph.delete_vertex(vertex):
+                print("Vertex does not exist! ")
+
+        elif user_option == "18":
+            u = input("Enter the first vertex: ")
+            v = input("Enter the second vertex: ")
+            if not input_graph.delete_edge(u, v):
+                print("Edge does not exist! ")
+
+        elif user_option == "19":
+            nr_vertices = int(input("Enter the number of vertices: "))
+            nr_edges = int(input("Enter the number of edges: "))
+            if nr_edges > nr_vertices * nr_vertices:
+                print("Too many edges! ")
+            else:
+                input_graph.generate_random_graph(nr_vertices, nr_edges)
 
 
 if __name__ == '__main__':
